@@ -1,0 +1,66 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Employee {
+  id             String   @id @default(cuid())
+  employeeNumber String   @unique
+  name           String
+  age            Int
+  dateOfJoining  DateTime
+  country        String
+  currency       String   @db.VarChar(3)
+  departmentId   String
+
+  department     Department          @relation(fields: [departmentId], references: [id])
+  compensation   CompensationRecord[]
+
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@index([departmentId])
+  @@index([country])
+}
+
+model CompensationRecord {
+  id            String   @id @default(cuid())
+  employeeId    String
+  salary        Decimal  @db.Decimal(15, 2)
+  currency      String   @db.VarChar(3)
+  effectiveDate DateTime
+  createdAt     DateTime @default(now())
+
+  employee      Employee @relation(fields: [employeeId], references: [id], onDelete: Restrict)
+
+  @@index([employeeId, effectiveDate])
+}
+
+model Department {
+  id        String     @id @default(cuid())
+  name      String     @unique
+  employees Employee[]
+  hr   Hr[]
+}
+
+model Hr {
+  id            String   @id @default(cuid())
+  name          String
+  age           Int
+  email         String   @unique
+  passwordHash  String
+  role          String   @default("HR")
+  departmentId  String
+  dateOfJoining DateTime
+
+  department    Department @relation(fields: [departmentId], references: [id])
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([departmentId])
+}
