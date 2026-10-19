@@ -5,9 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon src/index.js",
+    "start": "nodemon src/server.js",
     "seed": "node prisma/seed.js",
-    "seedHr": "node prisma/seedHr.js"
+    "seedHr": "node prisma/seedHr.js",
+     "test": "jest --runInBand",
+     "test:watch": "jest --watch"
   },
   "author": "shubhankar kumar singh",
   "license": "ISC",
@@ -25,7 +27,9 @@
     "zod": "^4.6.7"
   },
   "devDependencies": {
+    "jest": "^30.5.2",
     "nodemon": "^3.1.14",
-    "prisma": "^7.10.1"
+    "prisma": "^7.10.1",
+    "supertest": "^7.3.1"
   }
 }
