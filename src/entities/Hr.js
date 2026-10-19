@@ -5,12 +5,18 @@ class Hr {
     age,
     departmentId,
     dateOfJoining,
+    email,
+    passwordHash,
+    role
   }) {
     this.id = id;
     this.name = name;
     this.age = age;
     this.departmentId = departmentId;
     this.dateOfJoining = new Date(dateOfJoining);
+    this.email = email;
+    this.passwordHash = passwordHash;
+    this.role = role;
   }
 
   getDetails() {
@@ -20,6 +26,8 @@ class Hr {
       age: this.age,
       departmentId: this.departmentId,
       dateOfJoining: this.dateOfJoining,
+      email: this.email,
+      role: this.role
     };
   }
 }

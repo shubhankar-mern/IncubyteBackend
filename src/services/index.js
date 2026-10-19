@@ -16,10 +16,11 @@ const departmentRepository = new DepartmentRepository(prisma);
 const hrRepository = new HrRepository(prisma);
 
 const AnalyticsRepository = require("../repositories/AnalyticsRepository");
-const AnalyticsService = require("./AnalyticsService");
+const AnalyticsService = require("./Analyticsservice");
 const analyticsRepository = new AnalyticsRepository(prisma);
 const analyticsService = new AnalyticsService(analyticsRepository);
-
+const AuthService = require("./AuthService");
+const authService = new AuthService(hrRepository);
 
 
 module.exports = {
@@ -32,4 +33,5 @@ module.exports = {
   departmentService: new DepartmentService(departmentRepository),
   hrService: new HrService(hrRepository),
   analyticsService,
+  authService,
 };
